@@ -147,3 +147,60 @@ Subqueries allow for:
 They are especially useful for **analytics, reporting, and conditional filtering** in backend applications.
 
 ---
+
+## 📊 SQL Aggregations and Window Functions
+
+This section covers how to use **aggregate** and **window functions** to analyze data in the Airbnb Clone backend — enabling summaries, rankings, and insights from key tables like `users`, `bookings`, and `properties`.
+
+### 📂 File: `aggregations_and_window_functions.sql`
+
+---
+
+### 1️⃣ Aggregation Query – Total Bookings per User
+Find the total number of bookings made by each user.
+
+- Uses `COUNT()` to total bookings per user.  
+- Groups results with `GROUP BY`.  
+- Includes users with zero bookings using `LEFT JOIN`.
+
+**Example Tables:** `users`, `bookings`  
+**Key Functions:** `COUNT()`, `GROUP BY`
+
+---
+
+### 2️⃣ Window Function Query – Rank Properties by Bookings
+Rank properties based on the total number of bookings received.
+
+- Uses `COUNT()` to find total bookings per property.  
+- Applies `RANK()` to assign ranks by popularity.  
+- `ROW_NUMBER()` can be used for unique ranking.
+
+**Example Tables:** `properties`, `bookings`  
+**Key Functions:** `RANK()`, `ROW_NUMBER()`, `OVER()`
+
+---
+
+### 🧠 Summary
+
+| Function | Type | Purpose |
+|-----------|------|----------|
+| `COUNT()` | Aggregate | Counts rows per group |
+| `GROUP BY` | Clause | Groups rows for aggregation |
+| `RANK()` | Window | Assigns rank (ties share rank) |
+| `ROW_NUMBER()` | Window | Assigns unique rank |
+
+---
+
+### ⚙️ Run the Script
+
+```bash
+psql -U postgres -d airbnb_clone -f aggregations_and_window_functions.sql
+```
+
+### 💡 Why It Matters
+
+Aggregate and window functions are powerful SQL tools for analyzing and summarizing data without changing the underlying dataset.
+
+They enable:
+- **Analytics:** Understand booking trends and user activity.  
+- **Reporting:**

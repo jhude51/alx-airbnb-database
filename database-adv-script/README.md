@@ -1,6 +1,5 @@
-# 🧩 Airbnb Clone Backend – SQL Joins Practice
-
-## 🎯 Objective
+# 🧩 Airbnb Clone Backend – Advanced Querying Power
+## 🎯 Writing Complex Queries with Joins
 This script (`joins_queries.sql`) demonstrates the use of different **SQL JOIN types** in the context of the Airbnb Clone backend database.  
 It focuses on **retrieving relational data** between users, bookings, properties, and reviews — while following best practices for clarity and performance.
 
@@ -80,5 +79,71 @@ Using specific columns ensures your SQL is **readable, maintainable, and scalabl
 | **INNER JOIN** | Matching records only | View bookings tied to existing users |
 | **LEFT JOIN** | All left records + matching right ones | List all properties, even those not reviewed |
 | **FULL OUTER JOIN** | All records from both tables | Audit users and bookings for completeness |
+
+---
+
+## 🧠Practicing Subqueries
+
+The next stage in SQL mastery focuses on **subqueries** — queries nested inside other queries.  
+They allow you to filter, compare, or aggregate data dynamically, making your backend data logic more powerful and flexible.
+
+### 📂 File: `subqueries.sql`
+This script demonstrates both **non-correlated** and **correlated subqueries** in the context of the Airbnb Clone database.
+
+---
+
+### 1️⃣ Non-Correlated Subquery – Properties with Average Rating > 4.0
+Retrieves all properties whose average review rating exceeds 4.0.
+
+**Logic:**  
+- The inner query calculates average ratings for each property.  
+- The outer query filters only properties with an average above 4.0.
+
+**Example Tables:**  
+`properties`, `reviews`
+
+**Key Concept:**  
+The inner query runs **independently** of the outer query.
+
+---
+
+### 2️⃣ Correlated Subquery – Users with More Than 3 Bookings
+Finds users who have made **more than three bookings**.
+
+**Logic:**  
+- The subquery counts the number of bookings for each user.  
+- It references the outer query’s current `user_id`.  
+- Only users meeting the condition are returned.
+
+**Example Tables:**  
+`users`, `bookings`
+
+**Key Concept:**  
+The inner query is **correlated** with the outer query and executes **once per user**.
+
+---
+
+### ⚙️ How to Run
+Execute in PostgreSQL or your preferred SQL client:
+
+```bash
+psql -U postgres -d airbnb_clone -f subqueries.sql
+```
+### 🧠 Summary of Subquery Types
+
+| Subquery Type | Description | Example Use Case |
+|----------------|--------------|------------------|
+| **Non-Correlated** | Executes once and passes a static result to the main query. | Find properties with avg rating > 4.0 |
+| **Correlated** | Executes once for each row of the outer query. | Find users with more than 3 bookings |
+
+---
+
+### 💡 Why Subqueries Matter
+Subqueries allow for:
+- Filtering results based on **aggregated or dynamic conditions**  
+- Avoiding multiple JOINs for performance efficiency  
+- Simplifying complex logic into **nested, readable layers**  
+
+They are especially useful for **analytics, reporting, and conditional filtering** in backend applications.
 
 ---

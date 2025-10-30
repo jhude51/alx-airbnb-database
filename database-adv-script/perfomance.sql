@@ -106,6 +106,7 @@ LEFT JOIN
     payments AS pay ON b.booking_id = pay.booking_id
 WHERE 
     b.status = 'confirmed'
+    AND p.pricepernight > 40000
 ORDER BY 
     b.start_date DESC
 LIMIT 50;
